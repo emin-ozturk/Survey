@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Anket</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 </head>
 <body>
     <center>
@@ -18,11 +19,26 @@
                 <input class="answer" type="text" name="answers" placeholder="Cevap gir" required />
                 <input class="answer" type="text" name="answers" placeholder="Cevap gir" required />
 
-                <button>Oluştur</button>
+                <div id="newAnswers"></div>
+                <div class="insert-answer-button" onclick="insertNewAnswer()">+</div>
+
+                <button class="create-button">Oluştur</button>
             </form>
 
         </div>
 
     </center>
 </body>
+
+<script>
+    function insertNewAnswer() {
+        var newInput = document.createElement("input")
+        newInput.setAttribute("class", "answer")
+        newInput.setAttribute("type", "text")
+        newInput.setAttribute("name", "answers")
+        newInput.setAttribute("placeholder", "Cevap gir")
+        newInput.setAttribute("required", "true")
+        document.getElementById("newAnswers").appendChild(newInput)
+    }
+</script>
 </html>
