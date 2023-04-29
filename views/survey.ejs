@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Anket</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <center>
+        <div class="container">
+            <h2 class="header"><%=survey.question%></h2>
+                
+            <% for (let i = 0; i < survey.totalAnswerCount; i++) { %>
+                <% var rate = survey.answers[i].count * 100 / survey.totalVoteCount %>
+                <% if(isNaN(rate)) rate = 0 %>
+                <div style="display: flex; justify-content: space-between;">
+                    <p style="margin: 30px 0 0 0;">
+                        <%=survey.answers[i].answer%>
+                    </p>
+                    <p style="margin: 30px 0 0 0;">
+                        <%=rate.toFixed(2)%>% 
+                    </p>
+                </div>
+                <div class="answer answerProgressBar" 
+                    data-answer_index="<%=i%>"
+                    data-survey_id="<%=survey._id%>"
+                    >
+
+                    <div class="answer"
+                        style= "
+                            width: <%=rate%>%; 
+                            "
+                    ></div>
+                </div>
+            <% } %>
+            
+            <p>Toplam katılım: <%=survey.totalVoteCount%></p>
+
+        </div>
+
+    </center>
+</body>
+<script src="insertVote.js"></script>
+</html>
