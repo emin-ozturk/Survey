@@ -13,11 +13,11 @@
             <form action="/" method="post">
                 <h3 class="header">Yeni anket oluştur</h3>
                 <p>Soru</p>
-                <input class="question" type="text" name="question" placeholder="Soru gir" required />
+                <input class="question" type="text" name="question" placeholder="Soru" required />
 
                 <p>Cevaplar</p>
-                <input class="answer" type="text" name="answers" placeholder="Cevap gir" required />
-                <input class="answer" type="text" name="answers" placeholder="Cevap gir" required />
+                <input class="answer" type="text" name="answers" placeholder="Cevap" required />
+                <input class="answer" type="text" name="answers" placeholder="Cevap" required />
 
                 <div id="newAnswers"></div>
                 <div class="insert-answer-button" onclick="insertNewAnswer()">+</div>
@@ -29,16 +29,5 @@
 
     </center>
 </body>
-
-<script>
-    function insertNewAnswer() {
-        var newInput = document.createElement("input")
-        newInput.setAttribute("class", "answer")
-        newInput.setAttribute("type", "text")
-        newInput.setAttribute("name", "answers")
-        newInput.setAttribute("placeholder", "Cevap gir")
-        newInput.setAttribute("required", "true")
-        document.getElementById("newAnswers").appendChild(newInput)
-    }
-</script>
+<script src="answer.js"></script>
 </html>

@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-    width: 40%;
+    width: 35%;
     min-width: 400px;
     height: auto;
     background: white;
@@ -46,12 +46,30 @@ body {
 }
 
 .insert-answer-button {
-    width: 150px;
+    width: 100%;
     background: #ccc;
     text-align: center;
     padding: 10px 0;
+    margin-top: 10px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.delete-answer-button {
+    width: 10%;
+    height: 35px;
+    background: #f85959;
+    text-align: center;
+    border-radius: 5px;
+    margin: 10px 0 10px 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-answer-div {
+    display: flex;
 }
 
 .answerProgressBar {
