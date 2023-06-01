@@ -1,3 +1,5 @@
 # Survey
-![Ekran görüntüsü 2023-04-29 202330](https://user-images.githubusercontent.com/62982765/235315812-20800c3b-ae91-4dd7-9c8b-c0f523403eec.png)
-![Ekran görüntüsü 2023-04-29 202501](https://user-images.githubusercontent.com/62982765/235315818-58ccc787-4ea6-4354-a152-215bf672e1d2.png)
+
+![Ekran görüntüsü 2023-04-29 224940](https://user-images.githubusercontent.com/62982765/235321587-007c337e-8752-4441-9f1c-61f6e0c6d9a8.png)
+![Ekran görüntüsü 2023-04-29 224804](https://user-images.githubusercontent.com/62982765/235321589-5f3eaed6-fdd9-46a6-9e5c-941fd38b8f09.png)
+![Ekran görüntüsü 2023-04-29 224918](https://user-images.githubusercontent.com/62982765/235321593-a25b81b2-5e2f-4078-a43e-f1ac054f2687.png)
