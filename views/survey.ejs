@@ -10,16 +10,18 @@
 <body>
     <center>
         <div class="container">
+
+            
             <h2 class="header"><%=survey.question%></h2>
                 
             <% for (let i = 0; i < survey.totalAnswerCount; i++) { %>
                 <% var rate = survey.answers[i].count * 100 / survey.totalVoteCount %>
                 <% if(isNaN(rate)) rate = 0 %>
-                <div style="display: flex; justify-content: space-between;">
+                <div class="" style="display: flex; justify-content: space-between;">
                     <p style="margin: 30px 0 0 0;">
                         <%=survey.answers[i].answer%>
                     </p>
-                    <p style="margin: 30px 0 0 0;">
+                    <p class="answerRate" style="margin: 30px 0 0 0;">
                         <%=rate.toFixed(2)%>% 
                     </p>
                 </div>
@@ -28,7 +30,7 @@
                     data-survey_id="<%=survey._id%>"
                     >
 
-                    <div class="answer"
+                    <div class="answer answerProgressBarRate"
                         style= "
                             width: <%=rate%>%; 
                             "
@@ -36,11 +38,40 @@
                 </div>
             <% } %>
             
-            <p>Toplam katılım: <%=survey.totalVoteCount%></p>
+            <p id="totalVoteCount">Toplam katılım: <%=survey.totalVoteCount%></p>
 
         </div>
 
     </center>
+    <script src="/socket.io/socket.io.js"></script>
 </body>
+<script>
+    var socket = io();
+
+    socket.on('connect', function() {
+        console.log('WebSocket bağlantısı kuruldu')
+    })
+
+    socket.on('GET_VOTE', (survey) => {
+        updateElements(survey)
+    })
+
+    const updateElements = (survey) => {
+        const totalVoteCount = document.getElementById('totalVoteCount')
+        const answer = document.querySelectorAll('.answerRate')
+        const answerProgressBarRate = document.querySelectorAll('.answerProgressBarRate')
+        const answerArray = Array.from(answer)
+        const answerProgressBarRateArray = Array.from(answerProgressBarRate)
+        
+        totalVoteCount.innerHTML  = 'Toplam katılım: ' + survey.totalVoteCount
+
+        for (let i = 0; i < survey.totalAnswerCount; i++) {
+            var rate = survey.answers[i].count * 100 / survey.totalVoteCount
+            answerArray[i].innerHTML = rate.toFixed(2) + '% '
+            answerProgressBarRateArray[i].style.width = rate + '%'
+        }
+    }
+</script>
+  
 <script src="insertVote.js"></script>
 </html>

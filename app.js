@@ -4,6 +4,9 @@ const Survey = require('./models/survey')
 
 const app = express()
 
+const http = require('http').createServer(app);
+const io = require('socket.io')(http)
+
 const URL = 'mongodb://localhost:27017/survey'
 mongoose.set('strictQuery', true)
 mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -14,6 +17,18 @@ app.set('view engine', 'ejs')
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
+
+io.on('connection', (socket) => {
+    console.log('Bir kullanıcı bağlandı');
+  
+    socket.on('SET_VOTE', async (data) => {
+      await insert_survey(data)
+
+      const survey = await Survey.findOne({ '_id': data.surveyId })
+      io.emit('GET_VOTE', survey)
+    })
+  
+})
 
 app.get('/', (req, res) => {
     res.render('create-survey')
@@ -48,8 +63,8 @@ app.get('/:surveyId', async (req, res) => {
     res.render('survey', { 'survey': survey })
 })
 
-app.post('/insert-survey', async (req, res) => {
-    const { surveyId, answerIndex } = req.body
+const insert_survey = async (data) =>  {
+    const { surveyId, answerIndex } = data
     const survey = await Survey.findOne({ '_id': surveyId })
 
     var answers = survey.answers
@@ -60,14 +75,12 @@ app.post('/insert-survey', async (req, res) => {
 
     Survey.findByIdAndUpdate(surveyId, survey)
         .then((response) => {
-            res.json({link: '/' + surveyId})
         })
         .catch((err) => {
             res.send(err)
         })
+}
 
-})
-
-app.listen(3000, () => {
+http.listen(3000, () => {
     console.log('Server başladı')
 })
